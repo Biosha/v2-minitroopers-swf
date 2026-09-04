@@ -1,0 +1,41 @@
+@if (armyStore.army()) {
+  <div class="flex flex-col-reverse flex-nowrap lg:flex-row">
+    <div
+      class="mt-6 flex w-full justify-center px-2 lg:mt-10 lg:w-[255px] lg:justify-around"
+    >
+      <app-container-icon
+        [icon]="'/assets/images/money.webp'"
+        [value]="armyStore.army()!.gold"
+        class="mr-8 lg:mr-0"
+      ></app-container-icon>
+      <app-container-icon
+        [icon]="'/assets/images/power.webp'"
+        [value]="armyStore.army()!.power"
+      ></app-container-icon>
+    </div>
+    <div class="relative ml-4 mr-4 lg:ml-auto lg:mr-20">
+      <img
+        src="/assets/images/title.webp"
+        class="m-auto"
+        alt=""
+        draggable="false"
+      />
+      <h1
+        class="shadow-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 whitespace-nowrap text-xl font-bold text-white lg:mt-[-6px]"
+      >
+        {{ armyStore.displayedTitle() }}
+      </h1>
+    </div>
+  </div>
+  <div
+    class="flex flex-col items-center sm:px-2 md:px-0 lg:flex-row lg:items-start"
+  >
+    <div
+      class="mb-6 mt-2 flex flex-col items-center lg:mb-0 lg:w-[255px] lg:min-w-[255px]"
+    >
+      <app-troopers-block></app-troopers-block>
+      <app-container-history class="hidden lg:block"></app-container-history>
+    </div>
+    <router-outlet></router-outlet>
+  </div>
+}

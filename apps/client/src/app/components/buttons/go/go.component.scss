@@ -1,0 +1,14 @@
+.pending {
+  background: linear-gradient(to bottom, #ffd948, #ffab20);
+  border: 1px solid #e19c22;
+}
+
+.lost {
+  background: linear-gradient(to bottom, #e17946, #b63620);
+  border: 1px solid #992c16;
+}
+
+.won {
+  background: linear-gradient(to bottom, #a5d33f, #59b923);
+  border: 1px solid #50a91b;
+}

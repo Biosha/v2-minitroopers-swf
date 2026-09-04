@@ -1,0 +1,48 @@
+{
+  "name": "minitroopers",
+  "version": "0.0.2",
+  "private": true,
+  "engines": {
+    "npm": ">=10.9.0",
+    "node": ">=22.22.3"
+  },
+  "scripts": {
+    "postinstall": "npm run prisma:generate && npm run build --workspace=@minitroopers/prisma",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate": "prisma migrate dev",
+    "prisma:deploy": "prisma migrate deploy",
+    "prisma:create": "prisma migrate dev --create-only",
+    "prisma:reset": "prisma migrate reset",
+    "eternaltwin:start": "eternaltwin start",
+    "eternaltwin": "eternaltwin",
+    "audit": "npm audit --recursive --all --environment production",
+    "turbo:lint": "turbo run lint",
+    "turbo:build": "turbo run build",
+    "turbo:dev": "turbo run dev",
+    "turbo:test": "turbo run test",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "typecheck": "tsc -b packages/prisma packages/shared apps/server"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "@eternaltwin/cli": "^0.14.2",
+    "@types/node": "^22.18.0",
+    "dotenv": "^16.6.1",
+    "eslint": "^9.39.5",
+    "prettier": "^3.9.6",
+    "prisma": "^7.10.0",
+    "turbo": "^2.10.12",
+    "typescript": "~6.0.0"
+  },
+  "workspaces": [
+    "apps/client",
+    "apps/server",
+    "packages/shared",
+    "packages/prisma"
+  ],
+  "packageManager": "npm@10.9.0",
+  "dependencies": {
+    "@typescript-eslint/eslint-plugin": "^8.35.0"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "generated",
+    "outDir": "dist",
+    "sourceMap": true,
+    "declaration": true,
+    "module": "Node16",
+    "moduleResolution": "Node16"
+  },
+  "include": ["generated/**/*.ts"]
+}

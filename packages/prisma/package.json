@@ -1,0 +1,22 @@
+{
+  "name": "@minitroopers/prisma",
+  "version": "0.0.2",
+  "private": true,
+  "type": "module",
+  "main": "./dist/client.js",
+  "types": "./dist/client.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.js",
+      "default": "./dist/client.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc --build ./tsconfig.json",
+    "dev": "tsc --build ./tsconfig.json --watch"
+  },
+  "dependencies": {
+    "@prisma/client": "^7.10.0"
+  }
+}

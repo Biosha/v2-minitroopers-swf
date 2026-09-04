@@ -1,0 +1,8 @@
+**/*.md
+package-lock.json
+packages/prisma/generated
+packages/prisma/dist
+apps/client/.angular
+apps/client/src/assets/ruffle
+dist
+.turbo

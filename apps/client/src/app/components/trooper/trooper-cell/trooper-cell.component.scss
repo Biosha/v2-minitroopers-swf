@@ -1,0 +1,47 @@
+:host {
+  .minified {
+    @apply w-full rounded-b-none hover:z-10;
+
+    .trooper-name {
+      font-size: 0.65rem;
+    }
+  }
+
+  .allowHover {
+    @apply hover:shadow-[0px_0px_0px_2px_white];
+  }
+
+  .custom-gradient {
+    background: rgb(145, 162, 193);
+    background: linear-gradient(
+      180deg,
+      rgba(145, 162, 193, 1) 30%,
+      rgba(102, 116, 158, 1) 100%
+    );
+  }
+
+  .custom-gradient-corner {
+    background: rgb(145, 162, 193);
+    background: linear-gradient(
+      120deg,
+      rgba(145, 162, 193, 1) 30%,
+      rgba(102, 116, 158, 1) 100%
+    );
+  }
+
+  .trooper-name {
+    text-shadow: 0px 0px 3px #1c1f8d;
+  }
+
+  .item-cell {
+    @apply relative m-px h-5 w-5 rounded-sm bg-[#66749e];
+  }
+
+  .selected {
+    @apply shadow-[0px_0px_0px_2px_white];
+  }
+
+  .custom-box-shadow {
+    box-shadow: 2px 2px 2px 0px #00000061;
+  }
+}

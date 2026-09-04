@@ -1,0 +1,44 @@
+<div
+  class="relative flex w-[285px] flex-col rounded border border-[#86623e] bg-[#fcebca]"
+>
+  <div class="-ml-px -mr-1 -mt-px flex flex-wrap">
+    <!-- <div
+      *ngFor="let trooper of opponent.troopers; let index = index"
+      class="w-1/4"
+      [class.-ml-px]="index % 4 != 0"
+      [class.-mt-px]="index > 3"
+    >
+      <app-trooper-cell [trooper]="trooper"></app-trooper-cell>
+    </div> -->
+
+    <app-troopers-grid
+      [troopers]="opponent.troopers"
+      [armyColor]="opponent.color"
+      [withAdd]="false"
+      [columnNumber]="4"
+    ></app-troopers-grid>
+  </div>
+
+  <h2 class="mb-3 mt-2 text-center text-sm font-bold text-[#6b4320]">
+    {{ opponent | getArmyName }}
+  </h2>
+
+  <div class="flex justify-between">
+    <div
+      class="mb-2 ml-2 flex w-20 items-center justify-center rounded bg-[#e2c066] p-1 text-sm"
+    >
+      <img src="/assets/images/powers.webp" alt="" class="mr-1 h-5 w-5" />
+
+      <span class="text-[#6b4320]">{{ opponent.power }}</span>
+    </div>
+
+    <div
+      class="relative mb-1 mr-1 cursor-pointer"
+      [class.disabled-btn]="lock"
+      (click)="onClick($event, opponent.armyName)"
+    >
+      <img src="/assets/images/buttons/button5.webp" alt="" />
+      <h2 class="action-btn">Attaquer !</h2>
+    </div>
+  </div>
+</div>

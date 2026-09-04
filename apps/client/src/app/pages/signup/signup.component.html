@@ -1,0 +1,184 @@
+<div
+  class="w-100 -mb-12 pb-12 font-bold text-white"
+  style="
+    background: transparent url(/assets/images/art_welcome.webp) no-repeat left
+      bottom;
+    background-size: cover;
+  "
+>
+  <form [formGroup]="signupForm">
+    @if (referralUser) {
+      <div class="pt-4 lg:ml-auto lg:mr-6 lg:w-[575px]">
+        <div class="text-center text-2xl text-black">
+          {{ referralUser | getArmyName }} recrute !
+        </div>
+      </div>
+    }
+
+    <div class="mb-7 px-4 md:px-0 lg:ml-auto lg:mr-6 lg:w-[575px]">
+      <div class="pt-5 text-black">
+        @if (authStore.isUserLoggedIn()) {
+          <div class="mx-auto w-fit">[connecté ✅]</div>
+        } @else {
+          <div class="mx-auto w-fit">Connecte toi :</div>
+        }
+      </div>
+
+      @if (!authStore.isUserLoggedIn()) {
+        <div class="flex flex-col items-center gap-4 py-4">
+          <button
+            (click)="loginClicked()"
+            class="flex w-full max-w-sm items-center rounded-full bg-[#ab0036] px-4 py-2 font-bold text-white shadow-md transition duration-300 hover:shadow-lg"
+          >
+            <img
+              src="assets/images/logo/eternaltwin-logo.webp"
+              alt="EternalTwin Logo"
+              class="ml-2 mr-4 h-6 w-6"
+            />
+            <div class="m-auto">Sign in with Eternaltwin</div>
+          </button>
+        </div>
+      }
+
+      <app-container-blue>
+        <div class="text-center lg:ml-5 lg:text-left">
+          Create your own army !
+        </div>
+        <div class="mt-2 flex items-baseline justify-center">
+          <label for="army" class="mr-4 block">Amée </label>
+
+          <select
+            name="prefix"
+            id="prefix"
+            formControlName="prefix"
+            class="mr-1 h-[33px] rounded border border-[#7c8999] bg-gray-50 p-1 font-normal text-black disabled:text-[#9ca3af]"
+          >
+            @for (prefix of prefixes; track prefix) {
+              <option [value]="prefix.value">
+                {{ prefix.label }}
+              </option>
+            }
+          </select>
+
+          <input
+            name="army"
+            formControlName="army"
+            placeholder="remplir nom d'armée"
+            maxlength="22"
+            id="army"
+            class="rounded border border-[#7c8999] bg-gray-50 p-1 font-normal text-black disabled:bg-[#dee4ed]"
+          />
+        </div>
+        @if (army?.invalid && army?.errors?.["pattern"]) {
+          <p class="mt-1 text-center text-red-600 dark:text-red-500">
+            No special characters or numbers allowed
+          </p>
+        }
+        @if (army?.invalid && army?.errors?.["minlength"]) {
+          <p class="mt-1 text-center text-red-600 dark:text-red-500">
+            Army name min length : 4 characters
+          </p>
+        }
+
+        @if (army && army.dirty && army.valid) {
+          @if (availabilityState === "error") {
+            <p class="text-center text-red-600 dark:text-red-500">
+              Army name fobidden/unavailable, try another
+            </p>
+          }
+          @if (createdUrl && army.valid && army.dirty) {
+            <div class="mt-1 flex select-text items-baseline justify-center">
+              <div
+                class="mr-2 h-3 w-3 rounded-full border-2 border-black"
+                [style.background-color]="
+                  AvailabilyStateColor[availabilityState]
+                "
+              ></div>
+              {{ createdUrl }}
+            </div>
+          }
+        }
+      </app-container-blue>
+    </div>
+    <div class="px-4 md:px-0 lg:ml-auto lg:mr-6 lg:w-[575px]">
+      <app-container-blue-large>
+        <div class="flex flex-wrap items-center lg:flex-nowrap">
+          <div class="mx-auto mb-4 lg:mb-0 lg:ml-5 lg:mr-0">
+            Choose your first trooper !
+          </div>
+          <ul
+            class="ml-auto mr-auto flex flex-wrap items-center justify-center gap-4 lg:mr-[13px]"
+            [style.opacity]="signupForm.disabled ? '0.5' : '1'"
+          >
+            @for (color of availableColors; track color; let index = $index) {
+              <li class="flex-none">
+                <label class="relative block h-6 w-6">
+                  <input
+                    type="radio"
+                    name="color"
+                    class="peer sr-only"
+                    formControlName="color"
+                    [value]="index"
+                  />
+                  <span
+                    class="inline-flex h-full w-full items-center justify-center rounded-full ring-offset-2 duration-150 peer-checked:ring"
+                    [style.cursor]="signupForm.disabled ? 'default' : 'pointer'"
+                    [style]="'--tw-ring-color:' + color"
+                    [style.backgroundColor]="color"
+                  ></span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="pointer-events-none absolute inset-0 z-0 m-auto hidden h-5 w-5 text-white duration-150 peer-checked:block"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4.5 12.75l6 6 9-13.5"
+                    />
+                  </svg>
+                </label>
+              </li>
+            }
+          </ul>
+        </div>
+
+        <div class="mx-4 mt-5">
+          <app-choose-trooper
+            [troopers]="displayedTroopers"
+            [formGroup]="signupForm"
+            [groupColor]="signupForm.value.color"
+          ></app-choose-trooper>
+        </div>
+      </app-container-blue-large>
+
+      <div class="relative">
+        <div
+          class="m-auto w-fit cursor-pointer"
+          [class.disabled]="
+            !trooper?.value ||
+            !army ||
+            !army.value ||
+            army.invalid ||
+            availabilityState !== 'available' ||
+            lockSubmit
+          "
+        >
+          <img
+            src="/assets/images/buttons/button4.webp"
+            class="mt-2 cursor-pointer text-center"
+          />
+          <div
+            class="absolute left-1/2 top-1/2 -mt-[3px] -translate-x-1/2 -translate-y-1/2"
+            (click)="createArmy()"
+          >
+            Confirm
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

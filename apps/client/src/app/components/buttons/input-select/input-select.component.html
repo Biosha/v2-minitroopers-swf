@@ -1,0 +1,59 @@
+<div class="relative w-full">
+  <div
+    (click)="toggleDropdown()"
+    [class.ring-2]="isOpen"
+    [class.ring-blue-500]="isOpen"
+    class="mr-1 flex w-full flex-row items-center rounded border border-[#7c8999] bg-gray-50 p-[2px] font-normal text-black"
+  >
+    <div class="flex flex-1 flex-wrap gap-1">
+      @if (selectedValues.length === 0) {
+        <span class="text-gray-400">
+          {{ placeholder }}
+        </span>
+      }
+      @for (item of selectedValues; track $index) {
+        <span
+          class="inline-flex items-center gap-1 rounded bg-blue-500 px-2 py-1 text-sm text-white"
+        >
+          {{ getLabelByValue(item) }}
+          @if (!disabled) {
+            <span
+              (click)="removeItem($event, item)"
+              class="cursor-pointer font-bold transition-colors hover:text-red-300"
+            >
+              ×
+            </span>
+          }
+        </span>
+      }
+    </div>
+    <span
+      [class.rotate-180]="isOpen"
+      class="text-xs text-gray-600 transition-transform duration-200"
+    >
+      ▼
+    </span>
+  </div>
+
+  @if (isOpen) {
+    <div
+      class="absolute left-0 right-0 top-full z-50 mt-1 max-h-60 overflow-y-auto rounded-lg border border-gray-300 bg-white shadow-lg"
+    >
+      @for (option of options; track $index) {
+        <div
+          (click)="toggleOption(option.value)"
+          [class.bg-blue-100]="isSelected(option.value)"
+          class="flex cursor-pointer items-center gap-2 px-3 py-2 transition-colors hover:bg-gray-100"
+        >
+          <!-- <input
+            type="checkbox"
+            [checked]="isSelected(option.value)"
+            (click)="$event.stopPropagation()"
+            class="h-4 w-4 cursor-pointer rounded text-blue-500 focus:ring-2 focus:ring-blue-500"
+          /> -->
+          <span class="text-gray-700">{{ option.label }}</span>
+        </div>
+      }
+    </div>
+  }
+</div>

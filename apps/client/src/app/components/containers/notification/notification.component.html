@@ -1,0 +1,61 @@
+<div class="fixed bottom-4 left-4 z-50">
+  @for (notification of notifications; track notification) {
+    @if (notification.type === "error") {
+      <div
+        [@fadeOut]
+        role="alert"
+        class="mb-2 w-fit rounded border-s-4 border-red-500 bg-red-50 p-3"
+      >
+        <strong class="block font-medium text-red-800">
+          {{ notification.title }}
+        </strong>
+        <p class="mt-2 text-sm text-red-700">
+          {{ notification.message }}
+        </p>
+      </div>
+    }
+    @if (notification.type === "info") {
+      <div
+        [@fadeOut]
+        role="alert"
+        class="mb-2 w-fit rounded border-s-4 border-blue-500 bg-blue-50 p-3"
+      >
+        <strong class="block font-medium text-blue-800">
+          {{ notification.title }}
+        </strong>
+        <p class="mt-2 text-sm text-blue-700">
+          {{ notification.message }}
+        </p>
+      </div>
+    }
+    @if (notification.type === "success") {
+      <div
+        [@fadeOut]
+        role="alert"
+        class="mb-2 w-fit rounded border-s-4 border-green-500 bg-green-50 p-3"
+      >
+        <strong class="block font-medium text-green-800">
+          {{ notification.title }}
+        </strong>
+        <p class="mt-2 text-sm text-green-700">
+          {{ notification.message }}
+        </p>
+      </div>
+    }
+    <!-- <div
+    [@fadeOut]
+    class="mb-2 px-4 py-2 rounded-lg max-w-sm min-w-72 border-2"
+    style="box-shadow: 5px 5px 5px 0px #0000006e"
+      [ngClass]="{
+        'bg-green-100 border-green-500 text-green-700':
+          notification.type === 'success',
+        'bg-red-100 border-red-500 text-red-700': notification.type === 'error',
+        'bg-blue-100 border-blue-500 text-blue-700':
+          notification.type === 'info'
+      }"
+    >
+    <div class="font-bold mb-1">{{ notification.title }}</div>
+    <p>{{ notification.message }}</p>
+  </div> -->
+  }
+</div>

@@ -1,0 +1,16 @@
+{
+  "name": "@minitroopers/shared",
+  "version": "0.0.2",
+  "scripts": {
+    "lint": "eslint src/**/*.ts",
+    "build": "tsc --build ./tsconfig.json",
+    "dev": "tsc --build ./tsconfig.json --watch",
+    "test": "node --import tsx --test src/**/*.test.ts"
+  },
+  "devDependencies": {
+    "tsx": "^4.23.13",
+    "typescript": "~6.0.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts"
+}

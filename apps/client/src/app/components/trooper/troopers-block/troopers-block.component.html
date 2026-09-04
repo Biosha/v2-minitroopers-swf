@@ -1,0 +1,134 @@
+<div class="mx-2 w-[214px]">
+  <div
+    class="bg-bluecontainer relative z-10 w-full border border-t-0 border-black"
+  >
+    <div class="absolute left-[-6px] top-0">
+      <img
+        src="/assets/images/box1top.webp"
+        alt=""
+        class="z-[-1] w-[222px] min-w-[222px]"
+      />
+      <h2 class="h2-title absolute left-1/2 top-1 -translate-x-1/2 text-nowrap">
+        MES TROOPERS
+      </h2>
+    </div>
+
+    <div class="pb-7 pt-9" [class.pointer-events-none]="false">
+      <app-troopers-grid
+        [troopers]="troopers()"
+        [armyColor]="armyStore.army()!.color"
+        [withAdd]="true"
+        (clickTrooper)="trooperClicked($event)"
+      ></app-troopers-grid>
+    </div>
+
+    @if (!authStore.isAuthenticated()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'blue'"
+          [text]="'Connexion'"
+          (clicked)="connect()"
+        ></app-command-button>
+      </div>
+    }
+
+    @if (armyStore.isOwner()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'green'"
+          [text]="'Recruter un trooper'"
+          class="mb-10"
+          (clicked)="trooperAdd()"
+        ></app-command-button>
+      </div>
+    }
+    @if (false) {
+      <!-- Provision  -->
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'orange'"
+          [text]="'Historique'"
+        ></app-command-button>
+      </div>
+    }
+    <!-- @if (armyStore.isOwner()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'orange'"
+          [text]="'Gérer mon armée'"
+        ></app-command-button>
+      </div>
+    }
+    @if (armyStore.isOwner()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'blue'"
+          [text]="'Hiérarchie'"
+        ></app-command-button>
+      </div>
+    } -->
+    @if (displayRanking()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'blue'"
+          [text]="'Classement'"
+          (clicked)="goToClassment()"
+        ></app-command-button>
+      </div>
+    }
+
+    @if (allowedBack()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'blue'"
+          [text]="'Retour'"
+          (clicked)="backClicked()"
+        ></app-command-button>
+      </div>
+    }
+
+    @if (authStore.isAuthenticated() && !armyStore.isOwner()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'blue'"
+          [text]="'Mon armée'"
+          (clicked)="goToArmy()"
+        ></app-command-button>
+      </div>
+    }
+
+    @if (authStore.isAuthenticated()) {
+      <div class="-mx-1 mb-4">
+        <app-command-button
+          [type]="'blue'"
+          [text]="'Déconnexion'"
+          (clicked)="disconnect()"
+        ></app-command-button>
+      </div>
+    }
+
+    <div class="m-1 mt-0 bg-[#6775a2]">
+      <div class="p-2 text-xs text-white">
+        <img
+          src="/assets/images/info.webp"
+          alt=""
+          class="mb-[2px] mr-[6px] inline h-[12px] w-[12px]"
+        />
+        <span class="font-bold">INFO: </span>
+        <span>Suppression TOTALE des comptes/troopers imminente ⚠️</span>
+      </div>
+    </div>
+
+    <img
+      src="/assets/images/bottomleft.webp"
+      alt=""
+      class="absolute bottom-[-4px] left-[-2px]"
+    />
+
+    <img
+      src="/assets/images/bottomright.webp"
+      alt=""
+      class="absolute bottom-[-3px] right-[-2px]"
+    />
+  </div>
+</div>

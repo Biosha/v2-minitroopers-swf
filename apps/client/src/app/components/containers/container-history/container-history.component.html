@@ -1,0 +1,63 @@
+<div class="mx-2 mt-5 w-[214px] border border-[#86623e]">
+  <ul
+    class="text-textdescription border-2 border-[#e0bd63] bg-[#f2ddb8] text-xs"
+  >
+    @for (history of histories(); track history; let isLast = $last) {
+      <li
+        class="cursor-pointer border-b border-[#e0bd63] p-2 pt-1 hover:bg-[#f8ecd6]"
+        [class.border-b-0]="isLast"
+        (click)="historyClicked(history)"
+      >
+        @switch (history.type) {
+          @case ("war") {
+            <div class="mb-px text-[10px]">{{ history.date }}</div>
+            <div class="flex">
+              <img
+                [src]="
+                  $any(history).options.result === 'win'
+                    ? '/assets/images/bwin.webp'
+                    : '/assets/images/defeat.webp'
+                "
+                alt=""
+                class="mr-1 mt-[2px] h-4 w-4"
+              />
+              <div class="content-center underline">
+                @if ($any(history).options.result === "win") {
+                  <span class="font-bold text-[#3f8b12]">Victory</span>
+                }
+                @if ($any(history).options.result === "lose") {
+                  <span class="font-bold text-[#a9200a]">Defeat</span>
+                }
+                <span class="font-bold">
+                  {{ $any(history)?.options.opponent.armyName }}
+                </span>
+              </div>
+            </div>
+          }
+          @case ("recruit") {
+            <div class="mb-px text-[10px]">{{ history.date }}</div>
+            <div class="flex">
+              <img src="/assets/images/head.webp" alt="" class="mr-1 h-4 w-4" />
+              <div class="underline">
+                {{ "Armée recrutée : " + $any(history).options.armyName }}
+              </div>
+            </div>
+          }
+          @case ("trooperAvailable") {
+            <div class="flex">
+              <img src="/assets/images/head.webp" alt="" class="mr-1 h-4 w-4" />
+              <div class="underline">{{ "Nouvelle recrue disponible" }}</div>
+            </div>
+          }
+          @case ("creation") {
+            <div class="mb-px text-[10px]">{{ history.date }}</div>
+            <div class="flex">
+              <img src="/assets/images/head.webp" alt="" class="mr-1 h-4 w-4" />
+              <div class="underline">{{ "Armée créée" }}</div>
+            </div>
+          }
+        }
+      </li>
+    }
+  </ul>
+</div>

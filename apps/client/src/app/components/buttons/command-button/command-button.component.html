@@ -1,0 +1,23 @@
+<div
+  class="relative flex h-[31px] cursor-pointer items-center justify-center"
+  [class.blue-btn]="type === 'blue'"
+  [class.orange-btn]="type === 'orange'"
+  [class.green-btn]="type === 'green'"
+  [class.disabled]="disabled"
+  (click)="onClicked($event)"
+>
+  <img
+    src="/assets/images/buttons/btn-left.webp"
+    alt=""
+    class="absolute -left-[2px] -top-[5px]"
+  />
+  <h2 class="h2-title mb-[3px] overflow-hidden text-nowrap">{{ text }}</h2>
+  @if (icon) {
+    <img [src]="icon" alt="" class="mb-[3px] ml-1 h-5 w-5" />
+  }
+  <img
+    src="/assets/images/buttons/btn-right.webp"
+    alt=""
+    class="absolute -right-[2px] -top-[5px]"
+  />
+</div>

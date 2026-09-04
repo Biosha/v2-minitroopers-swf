@@ -1,0 +1,56 @@
+<div class="mx-10 mt-1 flex flex-col">
+  <p class="text-textdescription mb-8">
+    This ranking shows the top 25 armies in the game ranked according to their
+    power, aim to be the best!
+  </p>
+
+  <table class="text-center text-sm">
+    <thead>
+      <tr class="h2-title bg-[#94a5c8]">
+        <th class="border border-[#283d7c] px-2 py-1">Rank</th>
+        <th class="border border-[#283d7c] px-2 py-1">Army</th>
+        <th class="border border-[#283d7c] px-2 py-1">Power</th>
+        <th class="border border-[#283d7c] px-2 py-1">Faction</th>
+        <th class="border border-[#283d7c] px-2 py-1">Size</th>
+        <th class="border border-[#283d7c] px-2 py-1">Recruits</th>
+        <th class="border border-[#283d7c] px-2 py-1">Gold</th>
+      </tr>
+    </thead>
+
+    <tbody class="border border-black bg-[#fcebca] text-[#86623e]">
+      @for (user of users(); track $index) {
+        <tr [style.background-color]="user.isOwner ? '#f4d8a1' : ''">
+          <td class="border border-[#86623e] px-2 py-1">
+            {{ $index + 1 }}
+          </td>
+          <td class="border border-[#86623e] px-2 py-1">
+            <span
+              class="cursor-pointer underline"
+              (click)="goToArmy(user.armyName)"
+            >
+              {{ user.armyName }}
+            </span>
+          </td>
+          <td class="border border-[#86623e] px-2 py-1">
+            {{ user.power }}
+          </td>
+          <td class="border border-[#86623e] px-2 py-1">
+            <div
+              class="m-auto h-4 w-4 rounded-full border border-black"
+              [style.background-color]="availableColors[user.faction]"
+            ></div>
+          </td>
+          <td class="border border-[#86623e] px-2 py-1">
+            {{ user.size }}
+          </td>
+          <td class="border border-[#86623e] px-2 py-1">
+            {{ user.recruits }}
+          </td>
+          <td class="border border-[#86623e] px-2 py-1">
+            {{ user.isOwner ? user.gold : "—" }}
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>

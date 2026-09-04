@@ -1,0 +1,168 @@
+<div class="min-h-dvh overflow-hidden">
+  <div class="w-contentsm lg:w-contentxl relative mx-auto -mt-px mb-0 pt-px">
+    <!-- SP -->
+    <img
+      class="absolute left-[-245px] h-[48px] w-[127px]"
+      src="/assets/images/sp.webp"
+      alt=""
+      draggable="false"
+    />
+
+    <!-- PTOP2 -->
+    <div
+      class="box-shadowed absolute left-[-36px] top-[47px] z-[1] h-[34px]"
+      style="
+        background: transparent url(/assets/images/ptop2.webp) repeat-x center
+          bottom;
+        width: calc(972px + ((100dvw - 972px) / 2) + 36px);
+      "
+    ></div>
+    <!-- LOGO -->
+    <img
+      class="absolute left-[-14px] top-[4px] z-[1] h-[80px] w-[207px] cursor-pointer lg:h-[114px] lg:w-[296px]"
+      src="/assets/images/logo.webp"
+      alt="Logo Minitroopers"
+      draggable="false"
+      [routerLink]="['/']"
+    />
+    <!-- ARTHEAD -->
+    <img
+      class="absolute left-[265px] top-[8px] z-[1] hidden h-[49px] w-[241px] lg:left-[365px] lg:block"
+      src="/assets/images/arthead.webp"
+      alt=""
+      draggable="false"
+    />
+    <!-- CAMERA -->
+    <img
+      class="absolute right-[10px] z-[1] h-[96px] w-[195px] lg:left-[765px] lg:right-auto"
+      src="/assets/images/camera.webp"
+      alt=""
+      draggable="false"
+    />
+    <!-- PTOPLEFT -->
+    <img
+      class="absolute left-[-115px] z-[1] hidden h-[103px] w-[88px] lg:block"
+      src="/assets/images/ptopleft.webp"
+      alt=""
+      draggable="false"
+    />
+    <!-- PLEFT -->
+    <img
+      class="absolute left-[-40px] z-[1] h-[370px] w-[40px]"
+      src="/assets/images/pleft.webp"
+      alt=""
+      draggable="false"
+    />
+    <!-- PRIGHT -->
+    <img
+      class="absolute left-[971px] z-[1] h-[536px] w-[95px]"
+      src="/assets/images/pright.webp"
+      alt=""
+      draggable="false"
+    />
+    <div class="box-shadowed mt-20 border border-y-0 border-[#363c55]">
+      <div class="border-4 border-y-0 border-[#6f7da7]">
+        <div
+          class="bg-content bg-gradient relative min-h-[500px] border border-y-0 border-[#bdbdbd] pb-12"
+          style="
+            background: linear-gradient(
+              180deg,
+              rgb(224, 184, 115) 0%,
+              rgb(242, 221, 184) 90px
+            );
+          "
+        >
+          <ng-content></ng-content>
+        </div>
+      </div>
+    </div>
+
+    <div class="relative pb-2">
+      <!-- PBOTTOMLEFT -->
+      <img
+        class="absolute left-[-51px] top-[20px] h-[103px] w-[51px]"
+        src="/assets/images/pbottomleft.webp"
+        alt=""
+        draggable="false"
+      />
+      <!-- MT -->
+      <img
+        class="absolute right-[10px] top-[52px] h-[73px] w-[236px] lg:left-[794px] lg:right-auto"
+        src="/assets/images/mt.webp"
+        alt=""
+        draggable="false"
+      />
+      <!-- ARTMOUSE -->
+      <img
+        class="absolute left-[50%] top-[89px] hidden h-[34px] w-[69px] lg:left-[460px] lg:block"
+        src="/assets/images/art_mouse.webp"
+        alt=""
+        draggable="false"
+      />
+
+      <div
+        class="box-shadowed relative h-[83px] rounded-b-lg border border-t border-[#363c55] bg-[#4f597c]"
+      >
+        <!-- MORE GAME -->
+        <!-- TRANSLATE IMAGE -->
+        <img
+          class="absolute left-[-2px] top-[-20px] h-[41px] w-[126px]"
+          src="/assets/images/loc/moreg_fr.webp"
+          alt=""
+          draggable="false"
+        />
+        <!-- INDUS -->
+        <div
+          class="h-[15px]"
+          style="background: url(/assets/images/dtop.webp) repeat-x left top"
+        ></div>
+
+        <div class="mt-[8px] flex justify-center">
+          @for (ad of ads; track ad.title) {
+            <a
+              class="relative flex w-[222px] cursor-pointer pb-[3px] pl-3 pt-[3px] text-white no-underline md:flex"
+              [href]="ad.link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @if (!$last) {
+                <div
+                  class="absolute -right-1 top-0 h-full w-px bg-slate-700"
+                  style="box-shadow: 1px 1px #ffffff26"
+                ></div>
+              }
+              <div class="w-[60px] min-w-[60px]">
+                <img
+                  class="ml-[3px] h-[45px] w-[50px] border-2 border-white"
+                  [src]="ad.image"
+                  [alt]="ad.title"
+                  draggable="false"
+                />
+              </div>
+              <div class="mt-[-5px]">
+                <h2 class="text-sm">{{ ad.title }}</h2>
+                <p class="text-xs">{{ ad.description }}</p>
+              </div>
+            </a>
+          }
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="text-sm text-gray-900"
+      style="text-shadow: 0px 1px 0px rgba(253, 246, 213, 0.3)"
+    >
+      © {{ currentYear }} build v0.0.2
+    </div>
+  </div>
+
+  <!-- PBOTTOM -->
+  <div
+    class="h-[38px]"
+    style="
+      background: transparent url(/assets/images/pbottom.webp) repeat-x center
+        bottom;
+    "
+  ></div>
+</div>

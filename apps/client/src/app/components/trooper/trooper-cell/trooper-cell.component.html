@@ -1,0 +1,25 @@
+<div
+  class="relative rounded-[5px] border font-bold text-white"
+  [class.allowHover]="!disabledForm"
+  [class.selected]="selected"
+  [class.minified]="!withSkills"
+>
+  <div #insert class="h-[71px]"></div>
+
+  @if (withSkills && firstSkill !== undefined && secondSkill !== undefined) {
+    <div class="flex justify-evenly rounded-b-[4px] bg-[#66749e] py-[2px]">
+      <div>
+        <app-skills
+          [skillId]="firstSkill"
+          [trooperName]="$safeNavigationMigration(trooper?.name)"
+        ></app-skills>
+      </div>
+      <div>
+        <app-skills
+          [skillId]="secondSkill"
+          [trooperName]="$safeNavigationMigration(trooper?.name)"
+        ></app-skills>
+      </div>
+    </div>
+  }
+</div>

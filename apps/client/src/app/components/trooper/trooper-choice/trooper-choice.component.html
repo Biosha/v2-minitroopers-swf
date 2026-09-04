@@ -1,0 +1,55 @@
+@if (selectedTrooper) {
+  <div class="mx-3 mt-[5px] flex flex-col lg:mx-6">
+    <div class="text-textdescription mb-10 text-sm">
+      <b>{{ selectedTrooper.name }}</b> est passé au
+      <b>niveau {{ selectedTrooper.choices.length + 2 }}</b
+      >. Il peut maintenant apprendre une compétence parmi celles proposées
+      ci-dessous :
+    </div>
+    <div class="flex items-center justify-center lg:pr-10">
+      <div class="relative">
+        <img
+          [src]="
+            has3Choices
+              ? '/assets/images/levelup3.webp'
+              : '/assets/images/levelup2.webp'
+          "
+          alt=""
+          draggable="false"
+        />
+        <div class="absolute top-1/2 w-[72px] -translate-y-1/2">
+          <app-trooper-cell [trooper]="selectedTrooper"></app-trooper-cell>
+          <img src="/assets/images/up.gif" alt="" />
+        </div>
+      </div>
+      <div>
+        @for (skill of skills; track skill; let i = $index) {
+          @if (i !== 2 || has3Choices) {
+            <ng-template
+              *ngTemplateOutlet="skillChoice; context: { skill: skill, i: i }"
+            ></ng-template>
+          }
+        }
+      </div>
+    </div>
+  </div>
+}
+
+<ng-template #skillChoice let-skill="skill" let-i="i">
+  <div class="relative my-[10px] cursor-pointer" (click)="chooseSkill(i)">
+    <img src="/assets/images/box8.webp" alt="" draggable="false" />
+
+    <img
+      [appTooltip]="skill"
+      [trooperName]="selectedTrooper.name"
+      [src]="'/assets/images/skills/skill_' + skill + '.png'"
+      alt=""
+      class="absolute left-[30px] top-[13px] h-[35px] w-[35px] lg:top-[29px]"
+      draggable="false"
+    />
+
+    <div class="absolute left-[95px] top-2">
+      <h2 class="text-lg font-bold text-white">{{ allSkills[skill].name }}</h2>
+    </div>
+  </div>
+</ng-template>

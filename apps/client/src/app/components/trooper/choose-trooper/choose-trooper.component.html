@@ -1,0 +1,12 @@
+<div class="flex flex-wrap justify-evenly lg:justify-between">
+  @for (trooper of troopers; track trooper) {
+    <app-trooper-cell
+      [trooper]="trooper"
+      [groupColor]="groupColor"
+      [selected]="trooper.id === selectedTrooper"
+      [withSkills]="true"
+      [disabledForm]="formGroup.disabled"
+      (click)="onSelect(trooper.id)"
+    ></app-trooper-cell>
+  }
+</div>

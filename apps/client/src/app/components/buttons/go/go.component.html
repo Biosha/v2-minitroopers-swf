@@ -1,0 +1,16 @@
+<div
+  class="mx-1 flex cursor-pointer items-center justify-center rounded-sm"
+  [class.pending]="state === 'pending'"
+  [class.lost]="state === 'lose'"
+  [class.won]="state === 'win' || state === 'unlock'"
+  (click)="onClick($event)"
+>
+  @if (state === "unlock") {
+    <span class="shadow-title flex items-center text-xs text-white"
+      >Débloquer pour 5
+      <img src="/assets/images/token.webp" class="h-6 p-1" alt="gold"
+    /></span>
+  } @else {
+    <img [src]="image" alt="" class="py-px" />
+  }
+</div>

@@ -1,0 +1,163 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider        = "prisma-client"
+  output          = "./generated"
+  previewFeatures = ["nativeDistinct", "relationJoins"]
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Lang {
+  en
+  fr
+  de
+  es
+  ru
+  pt
+}
+
+model User {
+  id                       String          @id @unique
+  lang                     Lang            @default(fr)
+  name                     String          @db.VarChar(255)
+  createdAt                DateTime        @default(now()) @db.Timestamptz()
+  updatedAt                DateTime        @updatedAt @db.Timestamptz()
+  lastConnexion            DateTime        @default(now()) @db.Timestamptz()
+  admin                    Boolean         @default(false)
+  connexionToken           String
+  gold                     Int             @default(0)
+  power                    Int             @default(0)
+  armyName                 String          @unique @db.VarChar(255)
+  armyUrl                  String          @db.VarChar(255)
+  prefix                   Int             @default(0)
+  color                    Int             @default(0) // 0~5
+  sponsoredBy              User?           @relation("UserSponsor", fields: [sponsoredById], references: [id])
+  sponsoredById            String?
+  sponsoredUsers           User[]          @relation("UserSponsor")
+  referralGold             Int             @default(100)
+  ratsCount                Int             @default(0)
+  infiltrationOpponentArmy String?
+  infiltrationOpponentDate DateTime?
+  troopers                 Trooper[]
+  history                  HistoryUser[]
+  ipAddressUser            ipAddressUser[]
+  fights                   Fight[]
+  missions                 Mission[]
+  infiltrationUnlockAt     DateTime?       @db.Timestamptz
+  exterminationUnlockAt    DateTime?       @db.Timestamptz
+  epicUnlockAt             DateTime?       @db.Timestamptz
+  raids                    Raid[]
+
+  @@index([power])
+  @@index([armyName])
+}
+
+model ipAddressUser {
+  id     String @id @unique @default(dbgenerated("gen_random_uuid()"))
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  ip     String
+
+  @@index([userId])
+}
+
+enum HistoryType {
+  creation
+  war
+  trooperAdd
+  trooperUpdate
+  trooperAvailable
+  recruit
+}
+
+model HistoryUser {
+  id      String      @id @unique @default(dbgenerated("gen_random_uuid()"))
+  ts      DateTime    @default(now()) @db.Timestamptz()
+  type    HistoryType
+  options Json?
+  user    User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+
+  @@index([userId, ts])
+}
+
+model Trooper {
+  id            String   @id @unique @default(dbgenerated("gen_random_uuid()"))
+  createdAt     DateTime @default(now()) @db.Timestamptz()
+  updatedAt     DateTime @updatedAt @db.Timestamptz()
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  name          String   @db.VarChar(255)
+  choices       Int[]
+  group         Int
+  seed          Int
+  targetSystem  Int      @default(0)
+  targetType    Int      @default(0)
+  reloadSystem  Int      @default(2)
+  moveSystem    Int      @default(1)
+  CBody         Int      @default(0)
+  CWeapon       Int?
+  selectedItems Int[]
+
+  @@index([userId])
+}
+
+model TrooperDay {
+  id      String @id @unique @default(dbgenerated("gen_random_uuid()"))
+  name    String @db.VarChar(255)
+  seed    Int
+  choices Int[]
+}
+
+enum FightResult {
+  win
+  lose
+}
+
+model Fight {
+  id                String      @id @unique @default(dbgenerated("gen_random_uuid()"))
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  ts                DateTime    @default(now()) @db.Timestamptz()
+  userName          String
+  userPrefix        Int
+  opponentName      String
+  opponentPrefix    Int
+  fightInputSWFData String
+  result            FightResult
+
+  @@index([userId, ts])
+}
+
+enum MissionType {
+  exterminate
+  infiltrate
+  epic
+}
+
+model Mission {
+  id                  String      @id @unique @default(dbgenerated("gen_random_uuid()"))
+  user                User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId              String
+  ts                  DateTime    @default(now()) @db.Timestamptz()
+  type                MissionType
+  missionInputSWFData String
+  result              FightResult
+
+  @@index([userId, ts])
+}
+
+model Raid {
+  id        String      @id @unique @default(dbgenerated("gen_random_uuid()"))
+  user      User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  ts        DateTime    @default(now()) @db.Timestamptz()
+  result    FightResult
+  graveyard String[]
+
+  @@index([userId, ts])
+}

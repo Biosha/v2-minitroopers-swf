@@ -1,0 +1,103 @@
+<div class="mx-6 mt-[5px] flex flex-col-reverse lg:flex-row">
+  <ul class="list-none lg:w-[70%]">
+    <li class="float-left m-[3px] mr-[42px] w-[72px]">
+      <app-trooper-cell
+        [trooper]="selectedTrooper"
+        [disabledForm]="true"
+      ></app-trooper-cell>
+    </li>
+    @for (skill of displayedSkills; track skill) {
+      <li class="float-left m-[3px]">
+        <img
+          [appTooltip]="skill"
+          [trooperName]="selectedTrooper.name"
+          [src]="'/assets/images/skills/skill_' + skill + '.png'"
+          alt=""
+          class="h-[33px] w-[33px] opacity-30"
+          [class.!opacity-100]="unlockedSkills[skill]"
+          draggable="false"
+        />
+      </li>
+    }
+  </ul>
+
+  <div class="mb-5 mt-[5px] flex flex-col px-6 lg:mb-0 lg:w-[35%]">
+    <app-command-button
+      [type]="'blue'"
+      [disabled]="
+        !isEditable ||
+        !armyStore.isOwner() ||
+        (armyStore.army() !== null && armyStore.army()!.gold < this.upgradeCost)
+      "
+      [text]="'Améliorer pour ' + upgradeCost"
+      [icon]="'/assets/images/token.webp'"
+      (clicked)="payUpgrade()"
+    ></app-command-button>
+
+    <app-command-button
+      class="mt-5"
+      [type]="'blue'"
+      [text]="'Partager lien trooper'"
+      (clicked)="share()"
+    ></app-command-button>
+
+    <form [formGroup]="updateForm" class="mt-10 text-sm text-[#6b4320]">
+      <!-- <label for="name" class="mr-4 block"> Name : </label>
+        <input
+          name="name"
+          formControlName="name"
+          maxlength="11"
+          id="name"
+          class="mb-2 h-[26px] w-full rounded border border-[#7c8999] bg-gray-50 p-1 font-normal text-black"
+          /> -->
+
+      @for (updateAttribute of updateAttributes; track updateAttribute) {
+        <div class="mb-2">
+          <label [for]="updateAttribute.value" class="mr-4 block">
+            {{ updateAttribute.label }} :
+          </label>
+          <select
+            [name]="updateAttribute.value"
+            [id]="updateAttribute.value"
+            [formControlName]="updateAttribute.value"
+            class="mr-1 h-[26px] w-full rounded border border-[#7c8999] bg-gray-50 p-[2px] font-normal text-black"
+          >
+            @for (option of updateAttribute.options; track $index) {
+              <option [value]="option.value">
+                {{ option.name }}
+              </option>
+            }
+          </select>
+        </div>
+      }
+
+      <!-- [selectedValues]="selectedItems" -->
+      @if (selectableItems.length > 3) {
+        <div class="mb-2">
+          <label [for]="'selectedItems'" class="mr-4 block">
+            {{ "Selected items" }} :
+          </label>
+          <app-input-select
+            [options]="selectableItems"
+            [selectedValues]="selectedItems"
+            placeholder="Sélectionner vos items"
+            (selectionChange)="onSelectableItemsChange($event)"
+            [limit]="3"
+            [disabled]="updateForm.disabled"
+          ></app-input-select>
+        </div>
+      }
+    </form>
+    @if (isEditable) {
+      <app-command-button
+        [disabled]="updateForm.invalid || updateForm.pristine || lock"
+        class="mt-5"
+        [type]="
+          updateForm.pristine || updateForm.invalid || lock ? 'blue' : 'green'
+        "
+        [text]="'Sauvegarder'"
+        (clicked)="submitForm()"
+      ></app-command-button>
+    }
+  </div>
+</div>

@@ -1,0 +1,47 @@
+<div class="relative flex">
+  <div
+    class="bg-body mx-1 flex flex-1 items-center justify-center border border-amber-950"
+  >
+    <div class="font-bold text-white" style="text-shadow: 1px 1px 1px black">
+      {{ raidTroopers }}
+    </div>
+    <img src="/assets/images/head.webp" alt="" class="ml-1" />
+  </div>
+  <div class="flex-1">
+    @if (raidTroopers > 0 && user.raids!.length < 20 && !noRecruits) {
+      <app-go (eventClick)="onClick($event)"></app-go>
+    }
+  </div>
+</div>
+
+<div class="mt-1 flex items-center text-xs">
+  <img
+    src="/assets/images/info.webp"
+    alt=""
+    class="mr-[6px] h-[10px] w-[10px]"
+  />
+  @if (noRecruits) {
+    <p style="text-shadow: 1px 1px 0px rgba(253, 246, 213, 0.3)">
+      You need at least 1 recruit to start participating in raids!
+    </p>
+  } @else {
+    @if (raidTroopers > 0) {
+      <p style="text-shadow: 1px 1px 0px rgba(253, 246, 213, 0.3)">
+        {{ tryLeft }}
+      </p>
+    }
+    @if (raidTroopers === 0) {
+      <p style="text-shadow: 1px 1px 0px rgba(253, 246, 213, 0.3)">
+        Prochaine raid disponible dans
+      </p>
+      <img
+        src="/assets/images/anim_small_chrono.gif"
+        alt=""
+        class="mx-1 h-[14px] w-[14px]"
+      />
+      <p class="font-bold text-white" style="text-shadow: 1px 1px 1px black">
+        {{ timeLeft }}
+      </p>
+    }
+  }
+</div>

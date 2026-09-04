@@ -1,0 +1,20 @@
+@if (armyStore.army()) {
+  <div class="flex flex-col items-center lg:flex-row lg:items-start">
+    @if (displaySkill && selectedTrooper()) {
+      <!-- editbale if user == auth user -->
+      <app-trooper-skills
+        [selectedTrooper]="selectedTrooper()!"
+        [isEditable]="armyStore.isOwner()"
+        (switchButton)="switchButton()"
+        (updatedTrooper)="updatedTrooper($event)"
+      ></app-trooper-skills>
+    }
+    @if (!displaySkill && selectedTrooper()) {
+      <app-trooper-choice
+        [selectedTrooper]="selectedTrooper()!"
+        (returnChoice)="onReturn()"
+        (updatedTrooper)="updatedTrooper($event)"
+      ></app-trooper-choice>
+    }
+  </div>
+}

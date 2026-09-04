@@ -1,0 +1,43 @@
+@if (armyStore.army(); as user) {
+  <!-- <div class="flex flex-col-reverse flex-nowrap lg:flex-row">
+    
+    <div class="relative ml-4 mr-4 lg:ml-auto lg:mr-20">
+      <img
+        src="/assets/images/title.webp"
+        alt=""
+        class="m-auto"
+        draggable="false"
+      />
+      <h1
+        class="shadow-title absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-xl font-bold text-white lg:mt-[-6px]"
+      >
+        Add a trooper
+      </h1>
+    </div>
+  </div> -->
+  <div class="flex flex-col items-center lg:flex-row lg:items-start">
+    <div class="mx-10 mt-1 flex flex-col">
+      <div class="text-textdescription mb-8">
+        Sélectionne un trooper à ajouter à ton armée. Chaque jour de nouveaux
+        troopers sont disponibles. Choisis ton trooper avec soin :
+      </div>
+      <div class="mx-10 mb-8">
+        <app-choose-trooper
+          [troopers]="displayedTroopers"
+          [groupColor]="user.color"
+          [formGroup]="addForm"
+        ></app-choose-trooper>
+      </div>
+      <div class="mx-auto w-80">
+        @if (addCost > 0) {
+          <app-command-button
+            [type]="'blue'"
+            [text]="'Add for ' + addCost"
+            [icon]="'/assets/images/token.webp'"
+            (clicked)="addNewTrooper()"
+          ></app-command-button>
+        }
+      </div>
+    </div>
+  </div>
+}
