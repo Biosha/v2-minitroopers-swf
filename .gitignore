@@ -131,5 +131,9 @@ eternaltwin.toml
 # Prisma generated client
 packages/prisma/generated/
 
+# Deployment outputs (front + back)
+/public/
+/build/
+
 # Ruffle assets copied at build time
 apps/client/src/assets/ruffle/

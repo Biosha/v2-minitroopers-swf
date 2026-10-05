@@ -2,14 +2,14 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "dist",
+    "outDir": "../../build",
     "lib": ["esnext.disposable"],
     "module": "Node16",
     "moduleResolution": "Node16",
     "allowImportingTsExtensions": false,
     "noEmit": false
   },
-  "exclude": ["dist/**/*"],
+  "exclude": ["../../build/**/*"],
   "references": [
     {
       "path": "../../packages/shared"

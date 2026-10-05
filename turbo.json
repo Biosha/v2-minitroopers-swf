@@ -3,7 +3,7 @@
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "$TURBO_ROOT$/public/**", "$TURBO_ROOT$/build/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]
