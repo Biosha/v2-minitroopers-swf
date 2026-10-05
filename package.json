@@ -22,7 +22,10 @@
     "turbo:test": "turbo run test",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "typecheck": "tsc -b packages/prisma packages/shared apps/server"
+    "typecheck": "tsc -b packages/prisma packages/shared apps/server",
+    "katal:build": "turbo run build",
+    "katal:db:sync": "prisma migrate deploy",
+    "katal:start": "turbo run dev"
   },
   "license": "MIT",
   "devDependencies": {
