@@ -27,6 +27,10 @@ const OAuth = {
       return sendError(res, 500, "OAuth redirect failed");
     }
   },
+  callback: (req: Request, res: Response) => {
+    const query = req.originalUrl.split("?")[1];
+    res.redirect(302, query ? `/?${query}` : "/");
+  },
   token: (prisma: PrismaClient) => async (req: Request, res: Response) => {
     try {
       if (!req.query.code || typeof req.query.code !== "string") {

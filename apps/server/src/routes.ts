@@ -19,6 +19,7 @@ const initRoutes = (app: Express, prisma: PrismaClient, ruffle: Ruffle) => {
   // OAuth (EternalTwin)
   app.get("/api/oauth/redirect", asyncHandler(OAuth.redirect));
   app.get("/api/oauth/token", asyncHandler(OAuth.token(prisma)));
+  app.get("/oauth/callback", asyncHandler(OAuth.callback));
 
   // Utils
   app.get(
