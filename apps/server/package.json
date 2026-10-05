@@ -3,9 +3,10 @@
   "version": "0.0.2",
   "scripts": {
     "lint": "eslint src/**/*.ts",
-    "copy-bin": "copyfiles -u 1 src/bin/**/* dist",
-    "start-dist": "npm run copy-bin && node ./dist/server.js",
-    "build": "tsc --build ./tsconfig.json && npm run copy-bin",
+    "copy-bin": "copyfiles -u 1 \"src/bin/**/*\" ../../build",
+    "write-build-pkg": "node -e \"require('fs').writeFileSync('../../build/package.json', JSON.stringify({ type: 'module' }))\"",
+    "start-dist": "npm run copy-bin && npm run write-build-pkg && node ../../build/main.js",
+    "build": "tsc --build ./tsconfig.json && npm run copy-bin && npm run write-build-pkg",
     "dev": "tsc-watch --build ./tsconfig.json --onSuccess \"npm run start-dist\""
   },
   "type": "module",

@@ -6,3 +6,5 @@ apps/client/.angular
 apps/client/src/assets/ruffle
 dist
 .turbo
+public
+build

@@ -37,7 +37,7 @@ This is the repository for Minitroopers!
 | Script | Description |
 |--------|-------------|
 | `npm run turbo:dev` | Start client + server in dev |
-| `npm run turbo:build` | Build all workspaces |
+| `npm run turbo:build` | Build all workspaces (front → `./public`, back → `./build/main.js`) |
 | `npm run turbo:lint` | Lint all workspaces |
 | `npm run typecheck` | Typecheck shared + server |
 | `npm run prisma:generate` | Regenerate Prisma client |
@@ -50,6 +50,7 @@ This is the repository for Minitroopers!
 - Set `DISABLE_GAME_LIMITS=false`
 - Set `TRUST_PROXY=true` behind a reverse proxy
 - Run `npm run prisma:deploy` before starting the server
+- Start the server with `node build/main.js` (the front static files are in `./public`)
 
 ## File Structure
 
