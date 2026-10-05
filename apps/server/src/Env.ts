@@ -29,10 +29,10 @@ const parseNumber = (
 const NODE_ENV = process.env.NODE_ENV ?? "development";
 const isProduction = NODE_ENV === "production";
 
-const ETWIN_CLIENT_SECRET = process.env.ETWIN_CLIENT_SECRET ?? "dev";
+const ETWIN_CLIENT_SECRET = process.env.ETERNALTWIN_CLIENT_SECRET ?? "dev";
 
 if (isProduction) {
-  if (!process.env.ETWIN_CLIENT_SECRET || ETWIN_CLIENT_SECRET === "dev") {
+  if (!process.env.ETERNALTWIN_CLIENT_SECRET || ETWIN_CLIENT_SECRET === "dev") {
     throw new Error("ETWIN_CLIENT_SECRET must be set in production");
   }
 }
@@ -51,8 +51,8 @@ const Env = {
     process.env.DATABASE_URL ??
     "postgresql://eternaltwin.dev.admin:dev@localhost:5432/minitroopers?schema=public",
 
-  ETWIN_URL: process.env.ETWIN_URL ?? "http://localhost:50321/",
-  ETWIN_CLIENT_ID: process.env.ETWIN_CLIENT_ID ?? "minitroopers@clients",
+  ETWIN_URL: process.env.ETERNALTWIN_URL ?? "http://localhost:50321/",
+  ETWIN_CLIENT_ID: process.env.ETERNALTWIN_CLIENT_ID ?? "minitroopers@clients",
   ETWIN_CLIENT_SECRET,
 
   DEBUG_QUERIES: parseBoolean(process.env.DEBUG_QUERIES, false),
