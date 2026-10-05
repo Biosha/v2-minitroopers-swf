@@ -7,7 +7,7 @@
     "copy-ruffle": "node scripts/copy-ruffle.mjs",
     "start": "npm run copy-ruffle && ng serve",
     "dev": "npm run copy-ruffle && ng serve",
-    "build": "npm run copy-ruffle && ng build",
+    "build": "npm run copy-ruffle && node scripts/build.mjs",
     "test": "ng test"
   },
   "private": true,
